@@ -1,5 +1,11 @@
 # Exercice "Sécu by design"
 
+## Politique de sécurité du contenu
+  ```php
+  header("Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self';");
+  ```
+  Ce code est une mesure de sécurité pour protéger le site contre les attaques XSS et l'injection de contenu malveillant. Il limite les ressources que le navigateur peut charger en autorisant uniquement celles provenant du même domaine ('self'). Cela empêche l'exécution de scripts malveillants injectés depuis des sources non vérifiées.
+  
 ## Attaque 1 - Injection SQL
 
 ### Mesures de sécurité prises
