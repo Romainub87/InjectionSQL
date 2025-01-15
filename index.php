@@ -1,24 +1,19 @@
 <?php
 session_start();
 
-// Connexion à la base de données SQLite
 $conn = new SQLite3('db.sqlite');
 
-// Créer la table
 $conn->exec('CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, name TEXT, email TEXT, message TEXT)');
 
-// Génération d'un jeton CSRF si nécessaire
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Détection d'attaques par force brute
 $ip = $_SERVER['REMOTE_ADDR'];
 if (!isset($_SESSION['attempts'][$ip])) {
     $_SESSION['attempts'][$ip] = ['count' => 0, 'time' => time()];
 }
 
-// Vérification des tentatives
 $attempts = &$_SESSION['attempts'][$ip];
 if ($attempts['count'] >= 5 && time() - $attempts['time'] < 300) {
     die("Trop de tentatives, veuillez réessayer dans 5 minutes.");
@@ -26,16 +21,13 @@ if ($attempts['count'] >= 5 && time() - $attempts['time'] < 300) {
     $attempts = ['count' => 0, 'time' => time()];
 }
 
-// Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['csrf_token'])) {
     if (hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        // Validation et filtrage des données utilisateur
         $name = htmlspecialchars(trim($_POST['name']));
         $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
         $message = htmlspecialchars(trim($_POST['message']));
 
         if ($name && $email && $message) {
-            // Requête sécurisée avec des paramètres
             $stmt = $conn->prepare('INSERT INTO contacts (name, email, message) VALUES (:name, :email, :message)');
             $stmt->bindValue(':name', $name, SQLITE3_TEXT);
             $stmt->bindValue(':email', $email, SQLITE3_TEXT);
