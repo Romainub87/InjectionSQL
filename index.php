@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self';");
+
 $conn = new SQLite3('db.sqlite');
 
 $conn->exec('CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, name TEXT, email TEXT, message TEXT)');
