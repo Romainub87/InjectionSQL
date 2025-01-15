@@ -1,11 +1,35 @@
 # Exercice "Sécu by design"
 
 ## Sommaire
+- [Installation](#installation)
 - [Politique de sécurité du contenu](#politique-de-sécurité-du-contenu)
 - [Attaque 1 - Injection SQL](#attaque-1---injection-sql)
 - [Attaque 2 - CSRF](#attaque-2---csrf)
 - [Attaque 3 - Brute Force](#attaque-3---brute-force)
 - [Attaque 4 - XSS](#attaque-4---xss)
+
+// tuto pour lancer l'application
+
+## Installation
+1. Cloner le dépôt GitHub
+   ```bash
+   git clone https://github.com/Romainub87/Secure_form.git
+    ```
+   
+2. Lancer le conteneur Docker
+   ```bash
+   docker-compose up -d --build
+   ```
+   
+3. Accéder à l'application dans un navigateur
+   ```
+    http://localhost:8080
+    ```
+   
+4. Arrêter le conteneur Docker
+    ```bash
+    docker-compose down
+    ```
 
 ## Politique de sécurité du contenu
   ```php
