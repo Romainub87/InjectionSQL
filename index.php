@@ -12,13 +12,10 @@
 </form>
 
 <?php
-// Connexion à la base de données SQLite
 $conn = new SQLite3('db.sqlite');
 
-// Create the users table if it does not exist
 $conn->exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT)');
 
-// Insert initial data if the table is empty
 $result = $conn->query('SELECT COUNT(*) as count FROM users');
 $row = $result->fetchArray(SQLITE3_ASSOC);
 if ($row['count'] == 0) {

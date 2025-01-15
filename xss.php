@@ -16,7 +16,6 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment'])) {
     $comment = $_POST['comment'];
 
-    // Afficher le commentaire sans échapper les caractères spéciaux
     echo "<h2>Comments:</h2>";
     echo "<p>$comment</p>";
 }
