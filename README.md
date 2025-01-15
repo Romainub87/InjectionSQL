@@ -8,8 +8,6 @@
 - [Attaque 3 - Brute Force](#attaque-3---brute-force)
 - [Attaque 4 - XSS](#attaque-4---xss)
 
-// tuto pour lancer l'application
-
 ## Installation
 1. Cloner le dépôt GitHub
    ```bash
